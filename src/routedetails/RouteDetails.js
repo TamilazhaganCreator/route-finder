@@ -16,13 +16,16 @@ class RouteDetails extends React.Component {
     }
 
     setDetails(response) {
+        let legs = response.routes[0].legs[0]
         this.setState({
-            startAddress: response.routes[0].legs[0].start_address,
-            endAddress: response.routes[0].legs[0].end_address,
-            totalDistance: response.routes[0].legs[0].distance.text,
-            totalDuration: response.routes[0].legs[0].duration.text,
-            steps: response.routes[0].legs[0].steps.map(s => this.getObject(s))
+            startAddress: legs.start_address,
+            endAddress: legs.end_address,
+            totalDistance: legs.distance.text,
+            totalDuration: legs.duration.text,
+            steps: legs.steps.map(s => this.getObject(s))
         })
+        this.props.setPlaces("source", this.state.startAddress, "")
+        this.props.setPlaces("destination", this.state.endAddress, "")
     }
 
     getObject(mapStep) {
@@ -40,8 +43,8 @@ class RouteDetails extends React.Component {
                 <h3>Direction Details</h3>
                 {this.props.status !== 'ready' ?
                     (<div className="initial-msg">
-                        {this.props.status === 'initial' ?
-                            <div>Complete direction guide shown here</div> :
+                        {this.props.status !== 'loading' ?
+                            <div>{this.props.msg}</div> :
                             <div className="lds-dual-ring" />}
                     </div>) :
                     (<div>

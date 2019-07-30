@@ -5,7 +5,8 @@ import RouteDetails from './routedetails/RouteDetails';
 class MapDetail extends React.Component {
 
     state = {
-        status: "initial"
+        status: "initial",
+        msg: "Complete direction details shown here"
     }
 
     componentDidMount() {
@@ -19,15 +20,17 @@ class MapDetail extends React.Component {
     }
 
     reset() {
-        this.directionsDisplay.setDirections({routes: []})
-        this.setState({ status: "initial" })
+        if (this.state.status === "ready") {
+            this.directionsDisplay.setDirections({ routes: [] })
+            this.setState({ status: "initial", msg: "Complete direction details shown here" })
+        }
     }
 
     getDirections(origin, destination) {
         this.directionsDisplay.setMap(this.map);
         this.setState({ status: "loading" })
-        var directionsService = new this.google.maps.DirectionsService();
-        var request = {
+        let directionsService = new this.google.maps.DirectionsService();
+        let request = {
             origin: origin,
             destination: destination,
             travelMode: this.google.maps.DirectionsTravelMode.DRIVING
@@ -37,6 +40,8 @@ class MapDetail extends React.Component {
                 this.directionsDisplay.setDirections(response);
                 this.refs.routeDetails.setDetails(response)
                 this.setState({ status: "ready" })
+            } else {
+                this.setState({ status: "NOT_FOUND", msg: "Place not found" })
             }
         });
     }
@@ -47,7 +52,8 @@ class MapDetail extends React.Component {
                 <div className="row">
                     <div className="col-6 map-div card" id="map"></div>
                     <div className="col-6 map-div card route-details scrollbar">
-                        <RouteDetails ref="routeDetails" status={this.state.status} />
+                        <RouteDetails setPlaces={this.props.setPlaces} ref="routeDetails"
+                            status={this.state.status} msg={this.state.msg} />
                     </div>
                 </div>
             </div>

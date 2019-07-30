@@ -18,36 +18,37 @@ class InputPlace extends React.Component {
 
     handlePlaceChanged() {
         const place = this.autocomplete.getPlace();
-        this.props.setPlaces(this.props.type, place.formatted_address)
-        this.changeFocus()
-    }
-
-    setValue() {
-        this.autocompleteInput.current.value = this.props[this.props.type]
-    }
-
-    keyHandling(event) {
-        if ((event.keyCode === 8 || event.keyCode === 46) && this.autocompleteInput.current.value === "") {
-            this.props.setPlaces(this.props.type, "")
-
+        if (place.formatted_address) {
+            this.props.setPlaces(this.props.type, place.formatted_address, "selected")
+            this.changeFocus()
         }
     }
 
+    setValue(value) {
+        this.autocompleteInput.current.value = value
+    }
+
+    keyHandling(event) {
+        this.props.setPlaces(this.props.type, event.target.value, "typing")
+    }
+
     changeFocus() {
-        if (this.props.type === "source" && this.props.source.length === 0)
-            document.getElementById("autocomplete_destination").focus()
-        else if (this.props.type === "destination" && this.props.destination.length === 0)
-            document.getElementById("autocomplete_source").focus()
+        let destElement = document.getElementById("autocomplete_destination")
+        let srcElement = document.getElementById("autocomplete_source")
+        if (this.props.type === "source" && destElement.value.length === 0)
+            destElement.focus()
+        else if (this.props.type === "destination" && srcElement.value.length === 0)
+            srcElement.focus()
         else {
-            document.getElementById("autocomplete_source").blur()
-            document.getElementById("autocomplete_destination").blur()
+            srcElement.blur()
+            destElement.blur()
         }
     }
 
     render() {
         return (
             <div className="pad-pt-75">
-                <input className="input-field" onKeyUp={this.keyHandling} ref={this.autocompleteInput}
+                <input className="input-field" onInput={this.keyHandling} ref={this.autocompleteInput}
                     id={"autocomplete_" + this.props.type} placeholder={"Enter your " + this.props.type + " address"} />
             </div>
         );

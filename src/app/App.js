@@ -19,22 +19,24 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    var s = document.createElement('script');
-    s.type = 'text/javascript';
-    s.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyAAZCBd9bf9b-1TNBg5YrJKMfUJnTodyCE&libraries=places";
-    var x = document.getElementsByTagName('script')[0];
-    x.parentNode.insertBefore(s, x);
-    s.addEventListener('load', e => {
+    let script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyAAZCBd9bf9b-1TNBg5YrJKMfUJnTodyCE&libraries=places";
+    let scriptElement = document.getElementsByTagName('script')[0];
+    scriptElement.parentNode.insertBefore(script, scriptElement);
+    script.addEventListener('load', e => {
       this.setState(({ showComponent: true }));
     })
   }
 
-  setPlaces(from, address) {
+  setPlaces(from, address, findDirection) {
     this.setState({ [from]: address }, () => {
-      if (address === "")
+      if (findDirection === "typing")
         this.refs.mapDetail.reset()
-      else
+      else if (findDirection === "selected")
         this.getDirections()
+      else
+        this.changeInputValue()
     });
   }
 
@@ -43,8 +45,12 @@ class App extends React.Component {
     this.setState({ source: this.state.destination, destination: source }, () => {
       this.getDirections()
     });
-    this.refs.sourceInput.setValue()
-    this.refs.destinationInput.setValue()
+    this.changeInputValue()
+  }
+
+  changeInputValue() {
+    this.refs.sourceInput.setValue(this.state.source)
+    this.refs.destinationInput.setValue(this.state.destination)
   }
 
   getDirections() {
@@ -55,20 +61,21 @@ class App extends React.Component {
   render() {
     return (
       <div className="scrollbar">
+        <div><h2>Route Planner</h2></div>
         {this.state.showComponent ?
           (<div>
             <div className="row card search-bar">
               <div className="col-5 ">
-                <InputPlace type='source' ref="sourceInput" source={this.state.destination} setPlaces={this.setPlaces} />
+                <InputPlace type='source' ref="sourceInput" setPlaces={this.setPlaces} />
               </div>
               <div className="col-1 center-align">
                 <img className="up-down" src={updown} alt="Reverse search" onClick={this.reversePlaces} />
               </div>
               <div className="col-5">
-                <InputPlace type='destination' ref="destinationInput" destination={this.state.source} setPlaces={this.setPlaces} />
+                <InputPlace type='destination' ref="destinationInput" setPlaces={this.setPlaces} />
               </div>
             </div>
-            <MapDetail ref="mapDetail" />
+            <MapDetail ref="mapDetail" setPlaces={this.setPlaces} />
           </div>)
           : (<div className="loader"><div className="lds-dual-ring" /></div>)
         }
