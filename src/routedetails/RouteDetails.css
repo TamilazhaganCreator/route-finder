@@ -1,8 +1,8 @@
 .instructions-table {
-    font-family: Roboto, Arial, sans-serif;
+    font-family: Roboto;
     font-weight: 300 !important;
     color: #2c2c2c;
-    font-size: .94rem
+    font-size: .9rem
 }
 
 b {
@@ -64,8 +64,8 @@ h3 {
 .lds-dual-ring:after {
     content: " ";
     display: block;
-    width: 46px;
-    height: 46px;
+    width: 40px;
+    height: 40px;
     margin: 1px;
     border-radius: 50%;
     border: 5px solid #26a69a;
@@ -90,11 +90,16 @@ h3 {
 }
 
 .margin-top-pt-5{
-    margin-top:.5rem;
+    margin-top:.3rem;
 }
 
 .distance-box{
     background-color:#e5e5e5;
-    padding:4%;
+    padding:8%;
     border-radius: 4px;
+    font-size:.8rem;
+}
+
+.location-icon{
+    width:22px;
 }

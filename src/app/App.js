@@ -4,6 +4,7 @@ import MapDetail from '../MapDetail';
 import './App.css'
 import '../routedetails/RouteDetails.css'
 import updown from '../assets/up&down.svg'
+import route from '../assets/route.svg'
 
 class App extends React.Component {
 
@@ -16,6 +17,7 @@ class App extends React.Component {
     }
     this.setPlaces = this.setPlaces.bind(this)
     this.reversePlaces = this.reversePlaces.bind(this)
+    this.updown = React.createRef()
   }
 
   componentDidMount() {
@@ -41,6 +43,10 @@ class App extends React.Component {
   }
 
   reversePlaces() {
+    this.updown.current.className = "up-down down"
+    setTimeout(() => {
+      this.updown.current.className = "up-down"
+    }, 300);
     let source = this.state.source
     this.setState({ source: this.state.destination, destination: source }, () => {
       this.getDirections()
@@ -60,8 +66,10 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="scrollbar">
-        <div><h2>Route Planner</h2></div>
+      <div className="scrollbar full-page">
+        <div className="title-bar"><img src={route} alt="route" className="icon" />
+          <h2 >Route Finder</h2>
+        </div>
         {this.state.showComponent ?
           (<div>
             <div className="row card search-bar">
@@ -69,7 +77,7 @@ class App extends React.Component {
                 <InputPlace type='source' ref="sourceInput" setPlaces={this.setPlaces} />
               </div>
               <div className="col-1 center-align">
-                <img className="up-down" src={updown} alt="Reverse search" onClick={this.reversePlaces} />
+                <img ref={this.updown} className="up-down" src={updown} alt="Reverse search" onClick={this.reversePlaces} />
               </div>
               <div className="col-5">
                 <InputPlace type='destination' ref="destinationInput" setPlaces={this.setPlaces} />

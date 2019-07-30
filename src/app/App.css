@@ -1,5 +1,10 @@
+.full-page {
+  height: 100vh;
+  overflow-y: auto;
+}
+
 .map-div {
-  height: 72vh;
+  height: 62vh;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -8,12 +13,12 @@
   width: 49%;
 }
 
-.col-5{
-  width:45%;
+.col-5 {
+  width: 45%;
 }
 
-.col-1{
-  width:10%;  
+.col-1 {
+  width: 10%;
 }
 
 .row {
@@ -35,10 +40,18 @@
     width: 100% !important;
   }
   .map-div {
+    margin-top: 5%;
     height: 50vh !important;
   }
   .card {
     margin-bottom: 2%
+  }
+  .up-down {
+    transform: rotate(0deg) !important;
+  }
+  .down{
+    animation: none !important;
+    transform: none !important;
   }
 }
 
@@ -46,10 +59,10 @@
   .route-details {
     margin-left: 2%;
   }
-  .search-bar{
+  .search-bar {
     display: flex;
     align-items: center;
-  }  
+  }
 }
 
 .card {
@@ -80,11 +93,45 @@
   height: 100vh;
 }
 
-.up-down{
+.up-down {
   width: 24px;
   cursor: pointer;
+  transform: rotate(90deg);
+  transition: 300ms transform;
 }
 
-.center-align{
+.up-down.down {
+  animation: spin 300ms;
+  transform: rotate(90deg);
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(90deg);
+  }
+  100% {
+    transform: rotate(270deg);
+  }
+}
+
+.center-align {
   text-align: center;
+}
+
+.title-bar {
+  background-color: #029784;
+  padding: 1rem;
+  padding-left: 2%;
+  display: flex;
+  color: white;
+}
+
+h2 {
+  margin: 0 !important;
+  font-weight: 400 !important;
+}
+
+.icon {
+  margin-right: .5%;
+  width: 24px;
 }

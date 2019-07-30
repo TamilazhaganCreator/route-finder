@@ -49,7 +49,7 @@ class RouteDetails extends React.Component {
                     </div>) :
                     (<div>
                         <div className="header">
-                            <img src={start} alt="source" />
+                            <img src={start} alt="source" className="location-icon"/>
                             <span className="pad-left-1">{this.state.startAddress}</span>
                         </div>
                         <div className="total-details">
@@ -77,7 +77,7 @@ class RouteDetails extends React.Component {
                             )}
                         </div>
                         <div className="header">
-                            <img src={end} alt="destination" />
+                            <img src={end} alt="destination" className="location-icon" />
                             <span className="pad-left-1">{this.state.endAddress}</span>
                         </div>
                     </div>)
