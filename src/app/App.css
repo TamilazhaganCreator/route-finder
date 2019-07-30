@@ -4,7 +4,7 @@
 }
 
 .map-div {
-  height: 62vh;
+  height: 66vh;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -42,9 +42,7 @@
   .map-div {
     margin-top: 5%;
     height: 50vh !important;
-  }
-  .card {
-    margin-bottom: 2%
+    margin-bottom: 5%
   }
   .up-down {
     transform: rotate(0deg) !important;
@@ -90,7 +88,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 90vh;
 }
 
 .up-down {

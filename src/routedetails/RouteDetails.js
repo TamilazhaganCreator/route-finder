@@ -49,7 +49,7 @@ class RouteDetails extends React.Component {
                     </div>) :
                     (<div>
                         <div className="header">
-                            <img src={start} alt="source" className="location-icon"/>
+                            <img src={start} alt="source" className="location-icon" />
                             <span className="pad-left-1">{this.state.startAddress}</span>
                         </div>
                         <div className="total-details">
@@ -60,7 +60,7 @@ class RouteDetails extends React.Component {
                         </div>
                         <div className="instructions-table">
                             {this.state.steps.map((step, index) =>
-                                <div key={index} className="box">
+                                <div key={index} className="box" onClick={(e) =>  this.props.showInfo(index)}>
                                     <div className="small-content adp-substep">
                                         <div className="adp-stepicon">
                                             <div className={step.maneuver ? "adp-maneuver adp-" + step.maneuver : 'adp-maneuver adp-straight'} />
