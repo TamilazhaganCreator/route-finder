@@ -92,3 +92,9 @@ h3 {
 .margin-top-pt-5{
     margin-top:.5rem;
 }
+
+.distance-box{
+    background-color:#e5e5e5;
+    padding:4%;
+    border-radius: 4px;
+}

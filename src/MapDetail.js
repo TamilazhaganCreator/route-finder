@@ -11,16 +11,20 @@ class MapDetail extends React.Component {
     componentDidMount() {
         this.google = window.google
         this.directionsDisplay = new this.google.maps.DirectionsRenderer();
-        var map = new this.google.maps.Map(document.getElementById('map'), {
+        this.map = new this.google.maps.Map(document.getElementById('map'), {
             zoom: 12,
             center: { lat: 12.98, lng: 80.21 }
         });
+        this.directionsDisplay.setMap(this.map);
+    }
 
-        this.directionsDisplay.setMap(map);
-        this.directionsDisplay.setPanel(document.getElementById('panel'));
+    reset() {
+        this.directionsDisplay.setDirections({routes: []})
+        this.setState({ status: "initial" })
     }
 
     getDirections(origin, destination) {
+        this.directionsDisplay.setMap(this.map);
         this.setState({ status: "loading" })
         var directionsService = new this.google.maps.DirectionsService();
         var request = {
@@ -31,7 +35,6 @@ class MapDetail extends React.Component {
         directionsService.route(request, (response, status) => {
             if (status === this.google.maps.DirectionsStatus.OK) {
                 this.directionsDisplay.setDirections(response);
-                console.log(response, "response");
                 this.refs.routeDetails.setDetails(response)
                 this.setState({ status: "ready" })
             }

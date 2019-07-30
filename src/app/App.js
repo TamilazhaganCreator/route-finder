@@ -2,6 +2,8 @@ import React from "react";
 import InputPlace from "../inputplace/InputPlace";
 import MapDetail from '../MapDetail';
 import './App.css'
+import '../routedetails/RouteDetails.css'
+import updown from '../assets/up&down.svg'
 
 class App extends React.Component {
 
@@ -13,6 +15,7 @@ class App extends React.Component {
       destination: ""
     }
     this.setPlaces = this.setPlaces.bind(this)
+    this.reversePlaces = this.reversePlaces.bind(this)
   }
 
   componentDidMount() {
@@ -27,7 +30,24 @@ class App extends React.Component {
   }
 
   setPlaces(from, address) {
-    this.setState({ [from]: address });
+    this.setState({ [from]: address }, () => {
+      if (address === "")
+        this.refs.mapDetail.reset()
+      else
+        this.getDirections()
+    });
+  }
+
+  reversePlaces() {
+    let source = this.state.source
+    this.setState({ source: this.state.destination, destination: source }, () => {
+      this.getDirections()
+    });
+    this.refs.sourceInput.setValue()
+    this.refs.destinationInput.setValue()
+  }
+
+  getDirections() {
     if (this.state.source.length > 0 && this.state.destination.length > 0)
       this.refs.mapDetail.getDirections(this.state.source, this.state.destination)
   }
@@ -35,18 +55,22 @@ class App extends React.Component {
   render() {
     return (
       <div className="scrollbar">
-        {this.state.showComponent === true &&
-          <div>
-            <div className="row">
-              <div className="col-6 card">
-                <InputPlace type='source' setPlaces={this.setPlaces} />
+        {this.state.showComponent ?
+          (<div>
+            <div className="row card search-bar">
+              <div className="col-5 ">
+                <InputPlace type='source' ref="sourceInput" source={this.state.destination} setPlaces={this.setPlaces} />
               </div>
-              <div className="col-6 route-details card">
-                <InputPlace type='destination' setPlaces={this.setPlaces} />
+              <div className="col-1 center-align">
+                <img className="up-down" src={updown} alt="Reverse search" onClick={this.reversePlaces} />
+              </div>
+              <div className="col-5">
+                <InputPlace type='destination' ref="destinationInput" destination={this.state.source} setPlaces={this.setPlaces} />
               </div>
             </div>
             <MapDetail ref="mapDetail" />
-          </div>
+          </div>)
+          : (<div className="loader"><div className="lds-dual-ring" /></div>)
         }
       </div>
     )
