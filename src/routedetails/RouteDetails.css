@@ -1,0 +1,94 @@
+.instructions-table {
+    font-family: Roboto, Arial, sans-serif;
+    font-weight: 300 !important;
+    color: #2c2c2c;
+    font-size: .94rem
+}
+
+b {
+    font-weight: 400 !important
+}
+
+strong {
+    font-weight: 500 !important
+}
+
+.box {
+    display: flex;
+    padding: .75rem;
+    border-top: 1px solid #ccc
+}
+
+.distance-content {
+    width: 14%;
+    text-align:center;
+}
+
+.small-content {
+    width: 7%
+}
+
+.instructions {
+    width: 79%
+}
+
+.total-details {
+    border-top: 1px solid #ccc;
+    padding: .5rem;
+}
+
+.pad-left-1 {
+    padding-left: 1rem;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    padding: .5rem;
+    padding-left:1rem;
+    background-color:#26a69a;
+    color:white;
+    border-top: 1px solid #ccc;
+}
+
+h3 {
+    text-align: center;
+}
+
+.lds-dual-ring {
+    display: inline-block;
+    width: 64px;
+    height: 64px;
+}
+
+.lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 46px;
+    height: 46px;
+    margin: 1px;
+    border-radius: 50%;
+    border: 5px solid #26a69a;
+    border-color: #26a69a transparent #26a69a transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+}
+
+@keyframes lds-dual-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.initial-msg {
+    text-align: center;
+    border-top: 1px solid #ccc;
+    padding: 1rem;
+    padding-top:2rem;
+}
+
+.margin-top-pt-5{
+    margin-top:.5rem;
+}
