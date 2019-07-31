@@ -17,15 +17,24 @@ class RouteDetails extends React.Component {
 
     setDetails(response) {
         let legs = response.routes[0].legs[0]
+        let { startAddress, endAddress } = this.setAddress(response, legs);
         this.setState({
-            startAddress: legs.start_address,
-            endAddress: legs.end_address,
+            startAddress: startAddress,
+            endAddress: endAddress,
             totalDistance: legs.distance.text,
             totalDuration: legs.duration.text,
             steps: legs.steps.map(s => this.getObject(s))
         })
         this.props.setPlaces("source", this.state.startAddress, "")
         this.props.setPlaces("destination", this.state.endAddress, "")
+    }
+
+    setAddress(response, legs) {
+        let startAddress = response.request.origin.query;
+        startAddress = startAddress.length < legs.start_address.length ? legs.start_address : startAddress;
+        let endAddress = response.request.destination.query;
+        endAddress = endAddress.length < legs.end_address.length ? legs.end_address : endAddress;
+        return { startAddress, endAddress };
     }
 
     getObject(mapStep) {
@@ -60,7 +69,7 @@ class RouteDetails extends React.Component {
                         </div>
                         <div className="instructions-table">
                             {this.state.steps.map((step, index) =>
-                                <div key={index} className="box" onClick={(e) =>  this.props.showInfo(index)}>
+                                <div key={index} className="box" onClick={(e) => this.props.showInfo(index)}>
                                     <div className="small-content adp-substep">
                                         <div className="adp-stepicon">
                                             <div className={step.maneuver ? "adp-maneuver adp-" + step.maneuver : 'adp-maneuver adp-straight'} />

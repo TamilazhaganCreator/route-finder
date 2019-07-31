@@ -11,15 +11,15 @@ class InputPlace extends React.Component {
         this.keyHandling = this.keyHandling.bind(this)
     }
     componentDidMount() {
-        this.autocomplete = new window.google.maps.places.Autocomplete(this.autocompleteInput.current,
-            { "types": ["geocode"] });
+        this.autocomplete = new window.google.maps.places.Autocomplete(this.autocompleteInput.current);
         this.autocomplete.addListener('place_changed', this.handlePlaceChanged);
     }
 
     handlePlaceChanged() {
         const place = this.autocomplete.getPlace();
         if (place.formatted_address) {
-            this.props.setPlaces(this.props.type, place.formatted_address, "selected")
+            let name = place.formatted_address.includes(place.name) ? "" : place.name + ", "
+            this.props.setPlaces(this.props.type, name + place.formatted_address, "selected")
             this.changeFocus()
         }
     }

@@ -51,7 +51,6 @@ class App extends React.Component {
     this.setState({ source: this.state.destination, destination: source }, () => {
       this.getDirections()
     });
-    this.changeInputValue()
   }
 
   changeInputValue() {

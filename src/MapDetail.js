@@ -52,7 +52,7 @@ class MapDetail extends React.Component {
     showInfo(index) {
         let step = this.steps[index]
         this.infowindow2.close()
-        this.infowindow2.setContent(step.instructions + "<br>" + step.distance.text + "--" + step.duration.text + " ");
+        this.infowindow2.setContent(step.instructions + "<br>" + step.distance.text + " - " + step.duration.text + " ");
         this.infowindow2.setPosition(step.end_location);
         this.infowindow2.open(this.map);
     }
