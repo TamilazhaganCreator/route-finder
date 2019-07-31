@@ -23,7 +23,7 @@ class App extends React.Component {
   componentDidMount() {
     let script = document.createElement('script');
     script.type = 'text/javascript';
-    script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyAAZCBd9bf9b-1TNBg5YrJKMfUJnTodyCE&libraries=places";
+    script.src = "https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&libraries=places";
     let scriptElement = document.getElementsByTagName('script')[0];
     scriptElement.parentNode.insertBefore(script, scriptElement);
     script.addEventListener('load', e => {
