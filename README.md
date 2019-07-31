@@ -1,7 +1,7 @@
 # Route Finder
 Its a web app, which is used to find the routes between two places
 
-##Tech Stack
+## Tech Stack
 - React
 - Google Maps Api
 
