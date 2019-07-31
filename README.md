@@ -5,9 +5,6 @@ Its a web app, which is used to find the routes between two places
 - React
 - Google Maps Api
 
-#### Note :
-If you would like to run the code locally, you need to add the google api key at the 26th line of app.js file.
-
 ### `npm install`
 
 Install all dependencies of the project
@@ -27,3 +24,6 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 The build is minified and the filenames include the hashes.<br>
 Your app is ready to be deployed.
+
+#### Note :
+If you would like to run the code locally, you need to add the google api key at the 26th line of app.js file.
