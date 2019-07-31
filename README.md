@@ -5,6 +5,10 @@ Its a web app, which is used to find the routes between two places
 - React
 - Google Maps Api
 
+### `npm install`
+
+Install all dependencies of the project
+
 ### `npm start`
 
 Runs the app in the development mode.<br>
